@@ -18,7 +18,7 @@
       position: relative;
     }
 
-    /* Rainbow gradient text with whole-text dancing */
+    /* Rainbow gradient text with whole-text dancing + scaling */
     h1 {
       font-family: 'Comic Neue', cursive;
       font-size: clamp(4rem, 15vw, 12rem);
@@ -35,7 +35,8 @@
       -webkit-text-fill-color: transparent;
       color: transparent;
 
-      animation: rainbow 5s linear infinite, sway 1s ease-in-out infinite;
+      animation: rainbow 5s linear infinite, sway 1s ease-in-out infinite, pulse 4s ease-in-out infinite;
+      transform-origin: center center;
     }
 
     @keyframes rainbow {
@@ -44,8 +45,14 @@
     }
 
     @keyframes sway {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px) rotate(-3deg); }
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-10px) rotate(-3deg) scale(1.02); }
+    }
+
+    /* New smooth scaling animation for text */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
 
     /* Foreground GIFs */
@@ -128,6 +135,7 @@
   </script>
 </body>
 </html>
+
 
 
 
