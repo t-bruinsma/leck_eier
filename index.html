@@ -25,7 +25,7 @@
       text-align: center;
       position: relative;
       z-index: 10;
-      -webkit-text-stroke: 3px black;
+      -webkit-text-stroke: 4px black;
       display: inline-block;
       background: linear-gradient(
         270deg,
@@ -52,9 +52,7 @@
 
       animation:
         rainbow 5s linear infinite,
-        dance 4s ease-in-out infinite,
-        pulse 6s ease-in-out infinite,
-        rotate 8s ease-in-out infinite;
+        dance 5s ease-in-out infinite;
       transform-origin: center;
     }
 
@@ -63,27 +61,40 @@
       100% { background-position: -100% 0; }
     }
 
-    /* Gentle up-down motion */
     @keyframes dance {
-      0%, 100% { transform: translateY(0); }
-      25% { transform: translateY(-15px); }
-      50% { transform: translateY(10px); }
-      75% { transform: translateY(-10px); }
-    }
+  0%, 100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  10% {
+    transform: translateY(-6px) scale(1.08) rotate(3deg);
+  }
+  20% {
+    transform: translateY(4px) scale(1.15) rotate(-3deg);
+  }
+  30% {
+    transform: translateY(-8px) scale(1.18) rotate(4deg);
+  }
+  40% {
+    transform: translateY(5px) scale(1.12) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(0) scale(1.1) rotate(0deg);
+  }
+  60% {
+    transform: translateY(-7px) scale(1.15) rotate(3deg);
+  }
+  70% {
+    transform: translateY(5px) scale(1.12) rotate(-3deg);
+  }
+  80% {
+    transform: translateY(-6px) scale(1.08) rotate(2deg);
+  }
+  90% {
+    transform: translateY(3px) scale(1.05) rotate(-1deg);
+  }
+}
 
-    /* Smooth scaling pulse */
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
 
-    /* New: slow rotation back and forth */
-    @keyframes rotate {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(3deg); }
-      50% { transform: rotate(-3deg); }
-      75% { transform: rotate(2deg); }
-    }
 
     .gif {
       position: absolute;
@@ -161,8 +172,6 @@
   </script>
 </body>
 </html>
-
-
 
 
 
