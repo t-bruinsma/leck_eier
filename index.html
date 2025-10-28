@@ -13,15 +13,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: url('feuerwerk.gif') center/cover no-repeat;
+      background: url('gifs/feuerwerk.gif') center/cover no-repeat;
       background-color: black;
       position: relative;
     }
 
-    /* Text styling */
+    /* Responsive Text Styling */
     h1 {
       font-family: 'Comic Neue', cursive;
-      font-size: 20rem;
+      font-size: clamp(4rem, 15vw, 12rem); /* scales with viewport */
       font-weight: 700;
       display: flex;
       justify-content: center;
@@ -30,8 +30,11 @@
       background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet, red);
       background-size: 200% 100%;
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
+      color: transparent;
       -webkit-text-stroke: 5px black;
+      text-align: center;
       animation: rainbow 5s linear infinite;
     }
 
@@ -73,6 +76,16 @@
       z-index: 1;
       will-change: transform;
     }
+
+    /* Mobile Adjustments */
+    @media (max-width: 768px) {
+      h1 {
+        -webkit-text-stroke: 2px black; /* thinner stroke */
+      }
+      .gif {
+        width: 150px; /* smaller GIFs */
+      }
+    }
   </style>
 </head>
 <body>
@@ -84,9 +97,9 @@
 
   <script>
     const gifFiles = [
-      'banane.gif', 'blankies-pepe.gif', 'fisch.gif', 'fortnite.gif',
-      'ghgpls.gif', 'minecraft.gif', 'papabop.gif', 'pepedj.gif',
-      'pepehmm.gif', 'pepojam.gif', 'steve.gif', 'u-i-a-cat.gif'
+      'gifs/banane.gif', 'gifs/blankies-pepe.gif', 'gifs/fisch.gif', 'gifs/fortnite.gif',
+      'gifs/ghgpls.gif', 'gifs/minecraft.gif', 'gifs/papabop.gif', 'gifs/pepedj.gif',
+      'gifs/pepehmm.gif', 'gifs/pepojam.gif', 'gifs/steve.gif', 'gifs/u-i-a-cat.gif'
     ];
 
     gifFiles.forEach(file => {
@@ -100,8 +113,8 @@
     function animateGif(img) {
       const vw = window.innerWidth;
       const vh = window.innerHeight;
-      const gifWidth = 350; // base width
-      const gifHeight = 350; // approximate height for bounds
+      const gifWidth = img.offsetWidth;
+      const gifHeight = img.offsetHeight;
 
       let scale = 0.5 + Math.random() * 1;
       let x = Math.random() * (vw - gifWidth * scale);
@@ -111,6 +124,7 @@
       function move() {
         const duration = 4000 + Math.random() * 3000;
         let newScale = 0.5 + Math.random() * 1;
+
         let newX = Math.random() * (vw - gifWidth * newScale);
         let newY = Math.random() * (vh - gifHeight * newScale);
 
@@ -135,9 +149,6 @@
   </script>
 </body>
 </html>
-
-
-
 
 
 
