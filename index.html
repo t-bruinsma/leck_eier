@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dancing Rainbow Text with GIFs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('gifs/feuerwerk.gif') center/cover no-repeat;
+      background-color: black;
+      position: relative;
+    }
+
+    /* Text styling */
+    h1 {
+      font-family: 'Comic Neue', cursive;
+      font-size: 20rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet, red);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 5px black;
+      animation: rainbow 5s linear infinite;
+    }
+
+    h1 span {
+      display: inline-block;
+      animation: dance 1s ease-in-out infinite;
+    }
+
+    h1 span:nth-child(1) { animation-delay: 0s; }
+    h1 span:nth-child(2) { animation-delay: 0.1s; }
+    h1 span:nth-child(3) { animation-delay: 0.2s; }
+    h1 span:nth-child(4) { animation-delay: 0.3s; }
+    h1 span:nth-child(5) { animation-delay: 0.4s; }
+    h1 span:nth-child(6) { animation-delay: 0.5s; }
+    h1 span:nth-child(7) { animation-delay: 0.6s; }
+    h1 span:nth-child(8) { animation-delay: 0.7s; }
+    h1 span.space { width: 1ch; animation: none; }
+
+    @keyframes rainbow {
+      0% { background-position: 0% 0; }
+      100% { background-position: -100% 0; }
+    }
+
+    @keyframes dance {
+      0%, 100% { transform: translateY(0); }
+      25% { transform: translateY(-10px) rotate(-5deg); }
+      50% { transform: translateY(10px) rotate(5deg); }
+      75% { transform: translateY(-5px) rotate(-2deg); }
+    }
+
+    /* Foreground GIFs */
+    .gif {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 350px;
+      height: auto;
+      pointer-events: none;
+      z-index: 1;
+      will-change: transform;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    <span>L</span><span>E</span><span>C</span><span>K</span>
+    <span class="space"></span>
+    <span>E</span><span>I</span><span>E</span><span>R</span>
+  </h1>
+
+  <script>
+    const gifFiles = [
+      'gifs/banane.gif', 'gifs/blankies-pepe.gif', 'gifs/fisch.gif', 'gifs/fortnite.gif',
+      'gifs/ghgpls.gif', 'gifs/minecraft.gif', 'gifs/papabop.gif', 'gifs/pepedj.gif',
+      'gifs/pepehmm.gif', 'gifs/pepojam.gif', 'gifs/steve.gif', 'gifs/u-i-a-cat.gif'
+    ];
+
+    gifFiles.forEach(file => {
+      const img = document.createElement('img');
+      img.src = file;
+      img.className = 'gif';
+      document.body.appendChild(img);
+      animateGif(img);
+    });
+
+    function animateGif(img) {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const gifWidth = 350; // base width
+      const gifHeight = 350; // approximate height for bounds
+
+      let scale = 0.5 + Math.random() * 1;
+      let x = Math.random() * (vw - gifWidth * scale);
+      let y = Math.random() * (vh - gifHeight * scale);
+      img.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+
+      function move() {
+        const duration = 4000 + Math.random() * 3000;
+        let newScale = 0.5 + Math.random() * 1;
+        let newX = Math.random() * (vw - gifWidth * newScale);
+        let newY = Math.random() * (vh - gifHeight * newScale);
+
+        img.animate([
+          { transform: `translate(${x}px, ${y}px) scale(${scale})` },
+          { transform: `translate(${newX}px, ${newY}px) scale(${newScale})` }
+        ], {
+          duration: duration,
+          easing: 'ease-in-out',
+          fill: 'forwards'
+        });
+
+        x = newX;
+        y = newY;
+        scale = newScale;
+
+        setTimeout(move, duration);
+      }
+
+      move();
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
